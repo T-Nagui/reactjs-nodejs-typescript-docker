@@ -11,3 +11,9 @@ dockerFirstInit:
 
 down:
 	docker-compose down
+
+testServer:
+	docker  exec -it server bash -c "cd /usr/app && yarn test"
+
+testClient:
+	docker  exec -it client bash -c "cd /usr/app && yarn test"
