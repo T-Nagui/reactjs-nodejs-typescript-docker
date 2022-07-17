@@ -1,5 +1,6 @@
 # this is for the dockerfile to build the image in prod
 # Setup and build the client
+# not finished yet it needs to be tested and add docker-compose-prod.yml !
 
 FROM node:18-alpine as client
 

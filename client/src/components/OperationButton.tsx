@@ -1,18 +1,11 @@
-import React from 'react';
-
 type Props = {
-  operation: string;
+  operation: '*' | '/' | '+' | '-';
+  handleOperation: (operation: '*' | '/' | '+' | '-') => void;
 };
 
-const OperationButton = ({ operation }: Props) => {
+const OperationButton = ({ operation, handleOperation }: Props) => {
   return (
-    <button
-    // //   onClick={() =>
-    // //    // dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: { operation } })
-    // //   }
-    >
-      {operation}
-    </button>
+    <button onClick={() => handleOperation(operation)}>{operation}</button>
   );
 };
 

@@ -3,13 +3,13 @@ services:
   server:
     build:
       context: ./server/
+    container_name: server
     command: /usr/app/node_modules/.bin/nodemon src/index.ts
     volumes:
       - ./server/:/usr/app
       - /usr/app/node_modules
     ports:
       - '8282:8080'
-    # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
@@ -17,10 +17,12 @@ services:
     build:
       context: ./client/
     command: yarn start
+    container_name: client
+    env_file: ./client/.env
     volumes:
       - ./client/:/usr/app
       - /usr/app/node_modules
     depends_on:
       - server
     ports:
-      - '4000:3000'
+      - '4001:3000'

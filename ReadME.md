@@ -16,55 +16,33 @@ The local directories are mounted into the containers, so changes will reflect i
 
 ### Notes
 
-#### Installing npm dependencies
+````
+docker is not fully tested i'm working with old pc with widows :D
 
-All changes to `node_modules` should happen _inside_ the containers. Install any new dependencies by inside the container. You can do this via `docker-compose run`, but it’s easier to just update a running container and avoid having to rebuild everything:
+### Installing npm dependencies
 
-```
-docker-compose exec client
-```
-
-Then inside:
-
-```
-yarn add <new_dependency>
-```
-
-## Production
-
-```
-Not fully tested :)
 
 ```
 
-docker-compose -f docker-compose.prod.yml up
+
+
+### Using make
+
+I have `make` on my computer (by default in any linux distrubution i think).
+
+Start first time to build node images one time is good :
 
 ```
-
-For production, this uses the Dockerfile at the root of the repo. It creates a static build of the client React app and runs Express inside server, which handles both the API and serving of React files.
-
-As a result, different code is executing to serve the React files, but all of the API calls should remain the same. The difference between development and production isn’t ideal, but it does offer the simplicity of having the entire app run in one server on one machine.
-
-This is one of multiple ways a Node + React app could be setup, as suggested [here](https://daveceddia.com/create-react-app-express-production/):
-
-- **Keep them together** - have Express serve both the API and React files
-- **Split them apart** - have Express API on one machine and the React files on another (e.g., on S3 and use CORS to access the API)
-- **Put the API behind a proxy** - use something like NGINX to proxy the Express API server and React static files separately
-
-This project uses the “keep them together” approach. For better performance, you can set up a proxy (like Cloudflare) in between your server and the Internet to cache the static files. Or with some extra work you can fashion it to do either of the other two options.
-
-## Notes
-
-### Using docker compose
-
-I have `comp` aliased to `docker-compose` on my computer.
-
-Start via:
-
+make dockerFirstInit
+ ==> docker-compose build
 ```
-
-comp up
-
+make up to start
+==> docker-compose down &&  docker-compose -f docker-compose.yaml up -d
 ```
+make down:
+docker-compose down
 
-```
+make testServer:
+
+make testClient:
+````

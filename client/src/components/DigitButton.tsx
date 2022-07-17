@@ -1,12 +1,7 @@
 type DigitButtonProps = {
   digit: string;
+  handleDigit: (digit: string) => void;
 };
-export default function DigitButton({ digit }: DigitButtonProps) {
-  return (
-    <button
-    // onClick={() => dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit } })}
-    >
-      {digit}
-    </button>
-  );
+export default function DigitButton({ digit, handleDigit }: DigitButtonProps) {
+  return <button onClick={() => handleDigit(digit)}>{digit}</button>;
 }
